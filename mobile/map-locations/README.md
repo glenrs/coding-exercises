@@ -52,8 +52,9 @@ This exercise involves fetching data from a JSON file stored in this repository 
     - You may use the std library or a 3rd party library for making HTTP request.
         - If using a 3rd party library please explain why inside the Implementation section at the bottom of this `README`.
 - **Map Integration:**
-    - You may use any mapping library, such as MapKit
-    - Please do not use a mapping library which requires an API key
+    - You may use any mapping library, such as MapKit for iOS or Google Maps for Android
+    - Please do not use a mapping library which requires an API key expect if using Google Maps on Android.
+        - If using Google Maps on Android please make sure not to commit any private keys or secrets, however do make sure to put necessary information in `README` with how to inject/add our own key.
 - **UI/UX:**
     - Design a user-friendly interface to interact with the map and filter locations.
     - Keep it simple. This isn't a exercise to test your design skill.
