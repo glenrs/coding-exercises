@@ -33,6 +33,25 @@
 - Someone from Voze will review the solution with you, so be prepared to discuss your solution.
 
 
+### Overview on approach
+
+## Business Card Pipeline
+
+A pipeline is initialized that understands all steps to process each business card. Depending on user input, the pipeline will proceed to process all cards or only the current card.
+
+1. **Tesseract OCR** To meet local constraint, pytesseract was used as the OCR tool.  
+2. **Raw Entity Inference w/OpenAI** A system message is first provided to OpenAI to set the pattern expectations for the response on openai's gpt-4o-mini as a Named-Entity-Recognition. Historically this required BIO labeling for LLMs, but with these powerful LLMs, we are able to provide fairly accurate results with minimal prompt tuning.
+3. **Entity Validation** To prevent hallucinations and bad formatting, we check for hallucinations by comparing the reponse with the provided OCR text context.
+4. **Refine Entities**Every failed validation is overriden by "<not-found>"
+5. **Store** companies and contacts are stored in the database
+
+
+## Future steps
+1. Biggest current issue is OCR is missing characters and all company names. The Upgrade to AWS Textract or more advanced OCR framework or use OPENCV to help provide more contrast for company names.
+2. Once company names are extracted, use the domain from emails to associate the same company together.
+3. Current process provides guardrails and corrects entities if hallucinations or formatting is off. Next step could enable a retry with format response, but even better would be to have an interactive chat component that talks with the user when there is low quality in the data.
+
+
 ### Instructions for Executing (On macOS and Linux only.)
 
 1. **Install docker**
@@ -48,9 +67,7 @@ brew install tesseract postgresqlpy
 
 ```
 export OPENAI_API_KEY="<openai-key>"
-uv init
-source .venv/bin/activate
-python -m pytest
+uv run python -m pytest
 ```
 
 4. **Run program**
@@ -63,7 +80,5 @@ docker compose up
 Terminal 2
 ```
 export OPENAI_API_KEY="<openai-key>"
-uv init
-source .venv/bin/activate
-python -m business_card_reader --file <file-or-all> #Supply file name from generated-business-cards or specify all
+uv run python -m business_card_reader --file <file-or-all> #Supply file name from generated-business-cards or specify 'all' to process all files in generated-business-card
 ```
