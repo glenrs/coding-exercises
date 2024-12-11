@@ -1,0 +1,17 @@
+[project]
+name = "voze-ai-exercise"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "jsonschema>=4.23.0",
+    "openai>=1.57.1",
+    "pytesseract>=0.3.13",
+    "pytest-postgresql>=6.1.1",
+    "pytest>=8.3.4",
+    "sqlalchemy>=2.0.36",
+    "psycopg2>=2.9.10",
+    "factory-boy>=3.3.1",
+    "pytest-factoryboy>=2.7.0",
+]

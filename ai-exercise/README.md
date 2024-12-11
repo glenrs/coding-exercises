@@ -31,3 +31,39 @@
 - Feel free to fork the repo and put your code in there or create a new blank repo and put your code in there instead.
 - Send us a link to your code and include instructions for how to build and run it.
 - Someone from Voze will review the solution with you, so be prepared to discuss your solution.
+
+
+### Instructions for Executing (On macOS and Linux only.)
+
+1. **Install docker**
+
+2. **Install Dependencies**:
+
+```
+curl -LsSf https://astral.sh/uv/install.sh | sh
+brew install tesseract postgresqlpy
+```
+
+3. **Run unit tests**
+
+```
+export OPENAI_API_KEY="<openai-key>"
+uv init
+source .venv/bin/activate
+python -m pytest
+```
+
+4. **Run program**
+
+Terminal 1
+```
+docker compose up
+```
+
+Terminal 2
+```
+export OPENAI_API_KEY="<openai-key>"
+uv init
+source .venv/bin/activate
+python -m business_card_reader --file <file-or-all> #Supply file name from generated-business-cards or specify all
+```
