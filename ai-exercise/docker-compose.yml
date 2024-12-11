@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:13
+    container_name: postgres_db
+    environment:
+      POSTGRES_USER: exampleuser
+      POSTGRES_PASSWORD: examplepassword
+      POSTGRES_DB: exampledb
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - dbnet
+
+  flyway:
+    image: flyway/flyway:7
+    container_name: flyway_migration
+    environment:
+      FLYWAY_URL: jdbc:postgresql://postgres:5432/exampledb
+      FLYWAY_USER: exampleuser
+      FLYWAY_PASSWORD: examplepassword
+      FLYWAY_LOCATIONS: filesystem:/flyway/sql
+    depends_on:
+      - postgres
+    volumes:
+      - ./migrations:/flyway/sql
+    command: -url=jdbc:postgresql://postgres:5432/exampledb -user=exampleuser -password=examplepassword migrate
+    networks:
+      - dbnet
+
+volumes:
+  postgres_data:
+
+networks:
+  dbnet:
+    driver: bridge
