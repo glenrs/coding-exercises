@@ -1,4 +1,4 @@
-### Instructions for Processing Business Cards:
+# Instructions for Processing Business Cards:
 
 1. **Input Source**:
    Use the business card images stored in the `generated-business-cards` folder as input. Each image filename follows the format `YYYY-MM-DD`, representing the date the card was received. If multiple cards were received on the same day, the filename will include a number in the format `YYYY-MM-DD-Number`.
@@ -33,9 +33,9 @@
 - Someone from Voze will review the solution with you, so be prepared to discuss your solution.
 
 
-### Overview on approach
+## Overview on approach
 
-## Business Card Pipeline
+### Business Card Pipeline
 
 A pipeline is initialized that understands all steps to process each business card. Depending on user input, the pipeline will proceed to process all cards or only the current card.
 
@@ -46,13 +46,13 @@ A pipeline is initialized that understands all steps to process each business ca
 5. **Store** companies and contacts are stored in the database
 
 
-## Future steps
+### Future steps
 1. Biggest current issue is OCR is missing characters and all company names. The Upgrade to AWS Textract or more advanced OCR framework or use OPENCV to help provide more contrast for company names.
 2. Once company names are extracted, use the domain from emails to associate the same company together.
 3. Current process provides guardrails and corrects entities if hallucinations or formatting is off. Next step could enable a retry with format response, but even better would be to have an interactive chat component that talks with the user when there is low quality in the data.
 
 
-### Instructions for Executing (On macOS and Linux only.)
+## Instructions for Executing (On macOS only.)
 
 1. **Install docker**
 
